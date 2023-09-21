@@ -72,7 +72,9 @@ article {
   margin: var(--gutter);
   white-space: normal;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
 }
 
 /* page typeface, color, and white space */
@@ -154,3 +156,6 @@ hr.pagefold:after {
   line-height: 1.5em;
   background-color: white;
 }
+
+/* editter */
+

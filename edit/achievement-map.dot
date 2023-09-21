@@ -1,0 +1,74 @@
+digraph {
+  node [shape=box style="rounded,filled"]
+
+  Anticipate [fillcolor="grey"]
+  Achieved [fillcolor="palegreen"]
+  Wiki [fillcolor="lightblue"]
+  Tool [fillcolor="bisque"]
+  Parts [fillcolor="pink"]
+
+  {node [fillcolor="palegreen"]
+    PWA SW Offline Sitemap Page}
+  {node [fillcolor="lightblue"]
+    Site Frame}
+  {node [fillcolor="bisque"]
+    SWCache IndexDB}
+  {node [fillcolor="grey"]
+    Files Edit EditCode Plugins Edit
+    Publish Cache Schema choose
+  }
+  {node [fillcolor="pink"]
+    item text charms}
+
+  subgraph cluster_1 {
+    Anticipate
+    Achieved
+    Wiki
+    Tool
+    Parts
+  }
+  Wiki -> {PWA Edit} [style=invis]
+
+
+  PWA [label="Progressive\nWeb App (PWA)"]
+  SW [label="Service\nWorker"]
+  Offline [label="offline mode with\nknown files"]
+  Files [label="known files"]
+  Edit [label="editor and\ndownload\npages"]
+  Sitemap [label="browse one\nsitemap"]
+  Page [label="fetch\none page" fillcolor="palegreen3"]
+  Publish [label="(re)publish\n(to github or glitch)"]
+  Cache [label="cache all\npages"]
+
+  Site [label="SiteAdaptor"]
+  Frame [label="FramePlugin"]
+  SWCache [label="SW Cache"]
+  IndexDB
+
+  EditCode [label="code editor"]
+  Plugins [label="plugins\ncollection"]
+  Schema [label="schema\nmigration"]
+
+  Site -> {Sitemap Cache} [label="informs"]
+
+  PWA -> Edit
+
+  item -> {text charms} -> Edit
+
+  Edit -> Files [label="create\nnew"]
+  PWA ->EditCode -> Plugins -> Files
+  Frame -> {EditCode Plugins} [label="informs"]
+
+  PWA -> Sitemap -> Page
+  Sitemap -> Cache -> Files
+  Page -> Files [label="cache"]
+  {SWCache IndexDB Files}
+
+  Files -> Publish -> Schema
+  Files -> choose -> {IndexDB SWCache} -> Schema
+  Schema -> PWA [label="what does\nupdate\nlook like?"]
+
+  Files -> Offline
+  PWA -> SW
+  SW -> Offline
+}
