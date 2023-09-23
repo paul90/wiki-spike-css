@@ -157,5 +157,49 @@ hr.pagefold:after {
   background-color: white;
 }
 
-/* editter */
+/* editor */
+  /* button to open editor */
 
+.editbutton {
+  position: relative;
+  top: -25px;
+  right: -30px;
+  float: right;
+  opacity: 0;
+}
+
+/* only show when hoving over a panel */
+.observablehq:hover article .editbutton {
+  opacity: 1;
+}
+
+.editbutton > button {
+  border: none;
+  background-color: inherit;
+  font-size: 200%;
+}
+
+.editting {
+  display: grid;
+  grid: auto / auto-flow max-content;
+  column-gap: 2px;
+  column-rule: dashed 20px black;
+}
+
+.editting article {
+  margin-left: 0;
+}
+
+.editor {
+  width: var(--onewidth);
+  height: calc(100dvh - var(--footer-height) - 2*var(--gutter));
+  margin: var(--gutter);
+  white-space: normal;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  background-color: white;
+  padding: var(--page-padding);
+  margin-right: 0;
+}

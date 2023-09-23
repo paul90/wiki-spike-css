@@ -374,13 +374,16 @@ function panelAdapter({id, flag, page: {title, story=[], journal=[]}}) {
                   ...story.map(item => `viewof item${item.id}`)]
     main.variable(observer('panel'))
       .define('panel', deps, (html, title, flag, panelId, width, ...story) => {
-        return html`
+        const panelElement =  html`
           <article id="${panelId}">
+          <div class="editbutton"><button type="button">&#x1F4DD;</button></div>
           <div class=twins></div>
           <header><h1><img src="${flag}"> ${title}</h1></header>
           ${story}
           <footer></footer>
           </article>`
+        panelElement.querySelector('.editbutton button').addEventListener('click', openEditor)
+        return panelElement
       })
     // TODO for(let edit of journal) {/*...*/}
   }
@@ -411,6 +414,19 @@ function ghost(title, story) {
       journal
     }
   }
+}
+
+function openEditor (event) {
+  event.preventDefault()
+  console.log('openEditor', event)
+  let panel = event.originalTarget.closest('article')
+  let panelId = panel.id.substr(5)
+  let currentPage = wiki.lineup.find((element) => element.id == panelId).page
+  panel.parentNode.classList.add('editting')
+  // this will change, but just to prove that the editor will open
+  let pageText = currentPage.story.map(item => `<p><i>${item.type}</i> — ${item.text}</p>`).join('\n')
+  console.log('panel', panel)
+  panel.insertAdjacentHTML('beforebegin', `<div class='editor'><h1>${currentPage.title}</h1>${pageText}</div>`)
 }
 
 async function sitemap(domain) {
