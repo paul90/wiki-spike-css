@@ -422,7 +422,10 @@ function openEditor (event) {
   let panel = event.originalTarget.closest('article')
   let panelId = panel.id.substr(5)
   let currentPage = wiki.lineup.find((element) => element.id == panelId).page
+  // add editting class to lineup item
   panel.parentNode.classList.add('editting')
+  // and hide the open editor button - needs to be replaced with close/save button(s)
+  panel.querySelector('.editbutton').hidden = true
   // this will change, but just to prove that the editor will open
   let pageText = currentPage.story.map(item => `<p><i>${item.type}</i> — ${item.text}</p>`).join('\n')
   console.log('panel', panel)
